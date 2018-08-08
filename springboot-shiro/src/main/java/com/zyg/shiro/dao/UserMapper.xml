@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyg.shiro.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.zyg.shiro.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="createby" jdbcType="VARCHAR" property="createby" />
+    <result column="modifydata" jdbcType="TIMESTAMP" property="modifydata" />
+    <result column="modifyby" jdbcType="VARCHAR" property="modifyby" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user, password, age, job, mobile, createdate, createby, modifydata, modifyby
+  </sql>
+  
+  <select id="selectByName" parameterType="String" resultType="com.zyg.shiro.model.User">
+  	select * from emp
+  	where user =  #{user,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from emp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from emp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zyg.shiro.model.User">
+    insert into emp (id, user, password, 
+      age, job, mobile, createdate, 
+      createby, modifydata, modifyby
+      )
+    values (#{id,jdbcType=INTEGER}, #{user,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{age,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{createby,jdbcType=VARCHAR}, #{modifydata,jdbcType=TIMESTAMP}, #{modifyby,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyg.shiro.model.User">
+    insert into emp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="user != null">
+        user,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="createby != null">
+        createby,
+      </if>
+      <if test="modifydata != null">
+        modifydata,
+      </if>
+      <if test="modifyby != null">
+        modifyby,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="modifydata != null">
+        #{modifydata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyby != null">
+        #{modifyby,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyg.shiro.model.User">
+    update emp
+    <set>
+      <if test="user != null">
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        createby = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="modifydata != null">
+        modifydata = #{modifydata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyby != null">
+        modifyby = #{modifyby,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyg.shiro.model.User">
+    update emp
+    set user = #{user,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      createby = #{createby,jdbcType=VARCHAR},
+      modifydata = #{modifydata,jdbcType=TIMESTAMP},
+      modifyby = #{modifyby,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
